@@ -37,7 +37,7 @@ class Cal
   def number_days_in_month
     daysInFeb = days_in_feb
     daysInMonth = [31, daysInFeb, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
-    daysInMonth[month - 1]      
+    daysInMonth[month - 1]
   end
 
   def first_day
@@ -61,7 +61,6 @@ class Cal
     march_offset = ((zellerMonth +1) * 26/10).floor
     leap_year_offset = (zellerYear/4).floor + 6 *(zellerYear/100).floor + (zellerYear/400).floor
     day_of_week = (day_of_month + march_offset + zellerYear + leap_year_offset) %7
-    
   end
 
   def first_day_index
@@ -89,7 +88,7 @@ class Cal
       weekday_offset = 2
     end
     weekday_offset
-  end    
+  end
 
   def print_headers
     "\n     #{month_name} #{year}\nSu Mo Tu We Th Fr Sa\n"
@@ -97,10 +96,10 @@ class Cal
 
   def print_line_1
     line_1 = ""
-    first_day_index.times do 
+    first_day_index.times do
       line_1 += "   "
     end
-    (1..(7 - first_day_index)).each do |i| 
+    (1..(7 - first_day_index)).each do |i|
       line_1 += " #{i} "
     end
       line_1.rstrip + "\n"
@@ -113,7 +112,7 @@ class Cal
         line_2 += " #{i} "
       else
         line_2 += " #{i}"
-      end 
+      end
     end
     line_2.rstrip + "\n"
   end
@@ -121,7 +120,7 @@ class Cal
   def print_line_3
     line_3 = ""
     ((15 - first_day_index)..(first_day_index + weekday_offset + 7)).each do |i|
-      if i == 9 
+      if i == 9
         line_3 += " #{i} "
       else
         line_3 += "#{i} "
@@ -134,7 +133,7 @@ class Cal
     line_4 = ""
     if number_days_in_month == (first_day_index + weekday_offset + 14)
       @only_has_4_lines = true
-    end 
+    end
     ((22 - first_day_index)..(first_day_index + weekday_offset + 14)).each do |i|
     line_4 += "#{i} "
     end
@@ -165,7 +164,6 @@ class Cal
         line_6 += "#{i} "
       end
     else
-      line_6 = "                    "
     end
     line_6 += "                    \n"
   end
@@ -173,6 +171,7 @@ class Cal
   def print_all
      print_headers +  print_line_1 + print_line_2 + print_line_3 + print_line_4 + print_line_5 + print_line_6
   end
+
 end
 month1 = Cal.new(ARGV[0], ARGV[1])
 puts month1.print_all

@@ -293,6 +293,14 @@ def test_41_print_feb_2015_line_5
   assert_equal month1.print_line_5 , expected
 end
 
+def test_41b_print_feb_2015_line_6
+  month1 = Cal.new(2, 2015)
+  expected = "                    
+"
+  assert_equal month1.print_line_6 , expected
+
+end
+
 def test_42_print_feb_2015_all
   month1 = Cal.new(2, 2015)
   expected = """
@@ -307,4 +315,5 @@ Su Mo Tu We Th Fr Sa
 """
   assert_equal month1.print_all , expected
 end 
+
 end
