@@ -1,0 +1,31 @@
+Goal
+  This served as the capstone project for the first module of Nashville Software School's Ruby on Rails course.  However, this project uses pure ruby.  The program should mimic the functionaly of cal, which is built into bash, without using any date/time functions built in to ruby.
+
+File Structure
+  the lib folder has the program and the test folder has the tests
+
+To Run
+  simply open a command line in the lib folder and put the following:
+  ruby cal.rb 2 2012 (Do not put zero's infront of months.  Years must be 4 digits.)
+
+ the output will look something like this:
+      February 2015
+Su Mo Tu We Th Fr Sa
+ 1   2    3   4    5   6  7
+ 8   9  10  11  12 13 14
+15 16  17 18  19  20 21
+22 23  24 25  26  27 28
+
+Resources
+  The most difficult part of code to understand is probably the first_day method.  first_day uses zeller's congruence to figure out what day of the week any given month starts on.  Info on zeller's congruence can be found here: http://en.wikipedia.org/wiki/Zeller's_congruence
+
+  A lot of calander math exists in this code that may seem somewhat foreign at first.  Many numbers incriment in 2's and 7's due to the design of the Gregorian Calandar.  Offset's and incrimenting by 7 allows this program to assign the correct calandar dates to the correct day of the week in the correct position on the calandar without missing any days or numbers, regardless of the day of the week any given month starts on.
+
+  To Do
+    enalbe the program to print out full years.
+    convert remaining "magic date numbers" into variable names.
+
+  Authors
+  @MarcusFulbright
+
+
