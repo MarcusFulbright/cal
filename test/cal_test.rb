@@ -3,10 +3,10 @@ require './lib/cal'
 
 class CalTest < Test::Unit::TestCase
 
-  def test_01_month_stores_month
-    month1 = Cal.new(2, 1999)
-        assert_equal(2, month1.month)
-  end
+def test_01_month_stores_month
+  month1 = Cal.new(2, 1999)
+  assert_equal(2, month1.month)
+end
 
 def test_02_month_stores_year
   month1 = Cal.new(2, 1999)
@@ -112,7 +112,7 @@ end
 
 def test_20_print_line_5
   month1 = Cal.new(2, 2012)
-  expected = """26 27 28 29
+  expected = """26 27 28 29         
 """
 assert_equal month1.print_line_5, expected
 end
@@ -126,7 +126,7 @@ Su Mo Tu We Th Fr Sa
  5  6  7  8  9 10 11
 12 13 14 15 16 17 18
 19 20 21 22 23 24 25
-26 27 28 29
+26 27 28 29         
                     
 """
 assert_equal month1.print_all, expected
@@ -171,7 +171,7 @@ end
 
 def test_27_print_may_line_5
   month1 = Cal.new(5, 2012)
-  expected = """27 28 29 30 31
+  expected = """27 28 29 30 31      
 """
 assert_equal month1.print_line_5 , expected
 end
@@ -185,7 +185,7 @@ Su Mo Tu We Th Fr Sa
  6  7  8  9 10 11 12
 13 14 15 16 17 18 19
 20 21 22 23 24 25 26
-27 28 29 30 31
+27 28 29 30 31      
                     
 """
 assert_equal month1.print_all , expected
@@ -245,7 +245,7 @@ Su Mo Tu We Th Fr Sa
  9 10 11 12 13 14 15
 16 17 18 19 20 21 22
 23 24 25 26 27 28 29
-30                     
+30                  
 """
   assert_equal month1.print_all  , expected
 end
@@ -287,13 +287,7 @@ def test_40_print_feb_2015_line_4
   assert_equal month1.print_line_4 , expected
 end
 
-def test_41_print_feb_2015_line_5
-  month1 = Cal.new(2, 2015)
-  expected = "                    \n"
-  assert_equal month1.print_line_5 , expected
-end
-
-def test_41b_print_feb_2015_line_6
+def test_41_print_feb_2015_line_6
   month1 = Cal.new(2, 2015)
   expected = "                    
 "

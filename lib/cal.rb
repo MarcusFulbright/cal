@@ -11,7 +11,7 @@ class Cal
 
   def month_name
     months = %w[January February March April May June July August September October November December]
-    myMonthName = months[@month.to_f-1]
+    myMonthName = months[@month-1]
   end
 
   def leap_year?
@@ -27,48 +27,24 @@ class Cal
   end
 
   def days_in_feb
-    if leap_year?
-      daysInFeb = 29
-    else
-      daysInFeb = 28
-    end
+    (leap_year?) ? (daysInFeb = 29) : (daysInFeb = 28)
   end
 
   def number_days_in_month
-    daysInFeb = days_in_feb
-    daysInMonth = [31, daysInFeb, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+    daysInMonth = [31, days_in_feb, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
     daysInMonth[month - 1]
   end
 
   def first_day
-    months = %w[march april may june july august september october november december january february]
-    weekdays = %w[Saturday Sunday Monday Tuesday Wednesday Thursday Friday]
     day_of_month = 1
-    zellerYear = if @month == 1 || @month ==2
-                            zellerYear = @year - 1
-                          else
-                            zellerYear = @year
-                          end
+    zellerYear = (@month == 1 || @month ==2) ? (zellerYear = @year - 1) : (zellerYear = @year)
+    zellerMonth = (@month == 1 || @month == 2) ? (zellerMonth = @month + 12) : (zellerMonth = @month)
 
-    zellerMonth = if @month == 1
-                            zellerMonth = 13
-                          elsif @month == 2
-                            zellerMonth = 14
-                          else
-                            zellerMonth = @month
-                          end
-
-    march_offset = ((zellerMonth +1) * 26/10).floor
-    leap_year_offset = (zellerYear/4).floor + 6 *(zellerYear/100).floor + (zellerYear/400).floor
-    day_of_week = (day_of_month + march_offset + zellerYear + leap_year_offset) %7
+    day_of_week = (day_of_month + ((zellerMonth +1) * 26/10).floor + zellerYear + (zellerYear/4).floor + 6 *(zellerYear/100).floor + (zellerYear/400).floor) %7
   end
 
   def first_day_index
-    if first_day.zero?
-      first_day_index = 6
-    else
-      first_day_index = first_day - 1
-    end
+    (first_day.zero?) ? (first_day_index = 6) : (first_day_index = first_day - 1)
   end
 
   def weekday_offset
@@ -96,13 +72,11 @@ class Cal
 
   def print_line_1
     line_1 = ""
-    first_day_index.times do
-      line_1 += "   "
-    end
     (1..(7 - first_day_index)).each do |i|
       line_1 += " #{i} "
     end
-      line_1.rstrip + "\n"
+      line_1 = line_1.rstrip + "\n"
+      line_1.rjust(21)
   end
 
   def print_line_2
@@ -143,7 +117,7 @@ class Cal
   def print_line_5
     line_5 = ""
     if @only_has_4_lines == true
-      line_5 = "                    \n"
+      line_5 = ""
     else
       ((31 - first_day_index - 2)..(number_days_in_month)).each do |i|
         if i > (31 - first_day_index - 2) + 6
@@ -152,9 +126,9 @@ class Cal
         end
         line_5 += "#{i} "
         end
-        line_5 = line_5.rstrip + "\n"
+        line_5 = line_5.rstrip
       end
-  line_5
+  line_5.ljust(20) + "\n"
   end
 
   def print_line_6
@@ -163,9 +137,8 @@ class Cal
        ((31 - first_day_index - 2 + 7)..(number_days_in_month)).each do |i|
         line_6 += "#{i} "
       end
-    else
     end
-    line_6 += "                    \n"
+    line_6.ljust(20) + "\n"
   end
 
   def print_all
