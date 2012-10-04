@@ -5,7 +5,6 @@ class Cal
   def initialize( month, year )
     @month = month.to_i
     @year = year.to_i
-    @has_sixth_line = false
     @only_has_4_lines = false
   end
 
@@ -39,7 +38,6 @@ class Cal
     day_of_month = 1
     zellerYear = (@month == 1 || @month ==2) ? (zellerYear = @year - 1) : (zellerYear = @year)
     zellerMonth = (@month == 1 || @month == 2) ? (zellerMonth = @month + 12) : (zellerMonth = @month)
-
     day_of_week = (day_of_month + ((zellerMonth +1) * 26/10).floor + zellerYear + (zellerYear/4).floor + 6 *(zellerYear/100).floor + (zellerYear/400).floor) %7
   end
 
@@ -82,11 +80,7 @@ class Cal
   def print_line_2
     line_2 = ""
     ((8 - first_day_index)..(first_day_index + weekday_offset)).each do |i|
-      if i < 9
-        line_2 += " #{i} "
-      else
-        line_2 += " #{i}"
-      end
+    (i < 9) ? (line_2 += " #{i} ") : (line_2 += " #{i}")
     end
     line_2.rstrip + "\n"
   end
@@ -94,11 +88,7 @@ class Cal
   def print_line_3
     line_3 = ""
     ((15 - first_day_index)..(first_day_index + weekday_offset + 7)).each do |i|
-      if i == 9
-        line_3 += " #{i} "
-      else
-        line_3 += "#{i} "
-      end
+    (i == 9) ? (line_3 += " #{i} ") : (line_3 += "#{i} ")
     end
     line_3.rstrip + "\n"
   end
@@ -121,7 +111,6 @@ class Cal
     else
       ((31 - first_day_index - 2)..(number_days_in_month)).each do |i|
         if i > (31 - first_day_index - 2) + 6
-           @has_sixth_line = true
           break
         end
         line_5 += "#{i} "
@@ -133,7 +122,7 @@ class Cal
 
   def print_line_6
     line_6 = ""
-    if @has_sixth_line == true
+    if number_days_in_month > (31 - first_day_index - 2) + 6
        ((31 - first_day_index - 2 + 7)..(number_days_in_month)).each do |i|
         line_6 += "#{i} "
       end
@@ -146,6 +135,3 @@ class Cal
   end
 
 end
-month1 = Cal.new(ARGV[0], ARGV[1])
-puts month1.print_all
-

@@ -1,5 +1,6 @@
 require 'test/unit'
 require './lib/cal'
+require './lib/year'
 
 class CalTest < Test::Unit::TestCase
 
@@ -308,6 +309,98 @@ Su Mo Tu We Th Fr Sa
                     
 """
   assert_equal month1.print_all , expected
-end 
+end
+
+def test_43_print_row_1_names
+  year1 = Year.new(2012)
+  expected = """                            2012
+      January               February               March"""
+  assert_equal year1.row_1_headers , expected
+end
+
+def test_44_print_row_1_week_headers
+  year1 = Year.new(2012)
+  expected = "\nSu Mo Tu We Th Fr Sa  Su Mo Tu We Th Fr Sa  Su Mo Tu We Th Fr Sa\n"
+  assert_equal year1.row_week_heads , expected
+end
+
+def test_45_print_row_1_line_1
+  year1 = Year.new(2012)
+  expected = " 1  2  3  4  5  6  7            1  2  3  4               1  2  3\n"
+  assert_equal year1.row1_line_1 , expected
+end
+
+def test_46_print_row_1_line_2
+  year1 = Year.new(2012)
+  expected = " 8  9 10 11 12 13 14   5  6  7  8  9 10 11   4  5  6  7  8  9 10\n"
+  assert_equal year1.row1_line_2 , expected
+end
+
+def test_47_print_row_1_line_3
+  year1 = Year.new(2012)
+  expected ="15 16 17 18 19 20 21  12 13 14 15 16 17 18  11 12 13 14 15 16 17\n"
+  assert_equal year1.row1_line_3 , expected
+end
+
+def test_48_print_three_months
+  year1 = Year.new(2012)
+  expected = """                            2012
+      January               February               March
+Su Mo Tu We Th Fr Sa  Su Mo Tu We Th Fr Sa  Su Mo Tu We Th Fr Sa
+ 1  2  3  4  5  6  7            1  2  3  4               1  2  3
+ 8  9 10 11 12 13 14   5  6  7  8  9 10 11   4  5  6  7  8  9 10
+15 16 17 18 19 20 21  12 13 14 15 16 17 18  11 12 13 14 15 16 17
+22 23 24 25 26 27 28  19 20 21 22 23 24 25  18 19 20 21 22 23 24
+29 30 31              26 27 28 29           25 26 27 28 29 30 31
+                                                                \n"""                                                                
+  assert_equal year1.row_1 , expected
+end
+
+def test_49_print_row_2_line_1
+  year1 = Year.new(2012)
+  expected = " 1  2  3  4  5  6  7         1  2  3  4  5                  1  2\n"
+  assert_equal year1.row2_line_1 , expected
+end
+
+def test_50_print_row_2_line_2
+  year1 = Year.new(2012)
+  expected = " 8  9 10 11 12 13 14   6  7  8  9 10 11 12   3  4  5  6  7  8  9\n"
+  assert_equal year1.row2_line_2 , expected
+end
+
+def test_51_print_row_2_line_3
+  year1 = Year.new(2012)
+  expected ="15 16 17 18 19 20 21  13 14 15 16 17 18 19  10 11 12 13 14 15 16\n"
+  assert_equal year1.row2_line_3 , expected
+end
+
+def test_52_print_row_2
+  year1 = Year.new(2012)
+  expected = """        April                 May                  June
+Su Mo Tu We Th Fr Sa  Su Mo Tu We Th Fr Sa  Su Mo Tu We Th Fr Sa
+ 1  2  3  4  5  6  7         1  2  3  4  5                  1  2
+ 8  9 10 11 12 13 14   6  7  8  9 10 11 12   3  4  5  6  7  8  9
+15 16 17 18 19 20 21  13 14 15 16 17 18 19  10 11 12 13 14 15 16
+22 23 24 25 26 27 28  20 21 22 23 24 25 26  17 18 19 20 21 22 23
+29 30                 27 28 29 30 31        24 25 26 27 28 29 30
+                                                                
+"""
+  assert_equal year1.row_2 , expected
+end
+
+
+def test_54_print_row_4
+  year1 = Year.new(2012)
+  expected = """      October               November              December
+Su Mo Tu We Th Fr Sa  Su Mo Tu We Th Fr Sa  Su Mo Tu We Th Fr Sa
+    1  2  3  4  5  6               1  2  3                     1
+ 7  8  9 10 11 12 13   4  5  6  7  8  9 10   2  3  4  5  6  7  8
+14 15 16 17 18 19 20  11 12 13 14 15 16 17   9 10 11 12 13 14 15
+21 22 23 24 25 26 27  18 19 20 21 22 23 24  16 17 18 19 20 21 22
+28 29 30 31           25 26 27 28 29 30     23 24 25 26 27 28 29
+                                            30 31               
+"""
+  assert_equal year1.row_4 , expected
+end
 
 end
